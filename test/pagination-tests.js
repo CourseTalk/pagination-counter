@@ -1,0 +1,262 @@
+var assert = require('assert');
+var pagination = require('../pagination');
+
+
+describe('pagination', function () {
+    describe('getPages', function () {
+
+        it('get pages: page 1 max page: 2', function () {
+            var result = pagination.getPages(1, 2);
+
+            assert.deepEqual(result, [
+                { number: 0,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: true,
+                    active: false },
+                { number: 1,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 2,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 2,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: false,
+                    active: false }]);
+        });
+
+        it('get pages: page 1 max page: 1', function () {
+            var result = pagination.getPages(1, 1);
+
+            assert.deepEqual(result, []);
+        });
+
+        it('get pages: page 2 max page: 2', function () {
+            var result = pagination.getPages(2, 2);
+
+            assert.deepEqual(result, [
+                { number: 1,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 1,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 2,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 3,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: true,
+                    active: false }]);
+        });
+
+        it('get pages: page 1 max page: 10', function () {
+            var result = pagination.getPages(1, 10);
+
+            assert.deepEqual(result, [
+                { number: 0,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: true,
+                    active: false },
+                { number: 1,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 2,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 3,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 0,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: true,
+                    disabled: false,
+                    active: false },
+                { number: 10,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 2,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: false,
+                    active: false }]);
+        });
+
+        it('get pages: page 4 max page: 10', function () {
+            var result = pagination.getPages(4, 10);
+
+            assert.deepEqual(result, [
+                { number: 3,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 1,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 2,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 3,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 4,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 5,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 6,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 0,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: true,
+                    disabled: false,
+                    active: false },
+                { number: 10,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 5,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: false,
+                    active: false }]);
+        });
+
+        it('get pages: page 5 max page: 10', function () {
+            var result = pagination.getPages(5, 10);
+
+            assert.deepEqual(result, [
+                { number: 4,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 1,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 2,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 3,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 4,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 5,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 6,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 7,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 0,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: true,
+                    disabled: false,
+                    active: false },
+                { number: 10,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 6,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: false,
+                    active: false } ]);
+        });
+
+
+    })
+});

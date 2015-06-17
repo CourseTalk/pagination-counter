@@ -1,0 +1,25 @@
+{
+  "name": "pagination-counter",
+  "version": "1.0.0",
+  "description": "Javascript pagination counter",
+  "main": "pagination.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CourseTalk/pagination-counter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CourseTalk/pagination-counter/issues"
+  },
+  "homepage": "https://github.com/CourseTalk/pagination-counter",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  }
+}
