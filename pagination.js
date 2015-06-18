@@ -1,24 +1,30 @@
 var _ = require('underscore');
 
-var EDGES_LIMIT = 1,
-    CENTER_LIMIT = 2;
 
-function getPages(current_page, max_pages) {
+function PaginationCounter(options) {
+    this.options = _.extend({}, PaginationCounter.DEFAULT, options || {});
+}
+PaginationCounter.DEFAULT = {
+    edges_limit: 1,
+    center_limit: 2
+};
+
+PaginationCounter.prototype.getPages = function (current_page, max_pages) {
     var pages = [];
     if (max_pages > 1) {
-        setPreviousPage(pages, current_page);
-        setLeftEdges(pages, current_page);
-        pages.push(extendPage({
+        this.setPreviousPage(pages, current_page);
+        this.setLeftEdges(pages, current_page);
+        pages.push(this.extendPage({
             number: current_page,
             active: true
         }));
-        setRightEdges(pages, current_page, max_pages);
-        setNextPage(pages, current_page, max_pages);
+        this.setRightEdges(pages, current_page, max_pages);
+        this.setNextPage(pages, current_page, max_pages);
     }
     return pages;
-}
+};
 
-function extendPage(data) {
+PaginationCounter.prototype.extendPage = function (data) {
     return _.extend({}, {
         number: 0,
         is_previous: false,
@@ -27,78 +33,90 @@ function extendPage(data) {
         disabled: false,
         active: false
     }, data)
-}
+};
 
-function setPreviousPage(pages, current_page) {
+PaginationCounter.prototype.setPreviousPage = function (pages, current_page) {
     var page;
     if (current_page > 1) {
-        page = extendPage({
+        page = this.extendPage({
             number: current_page - 1,
             is_previous: true
         });
     } else {
-        page = extendPage({
+        page = this.extendPage({
             number: current_page - 1,
             is_previous: true,
             disabled: true
         });
     }
     pages.push(page);
-}
+};
 
-function setLeftEdges(pages, current_page) {
+PaginationCounter.prototype.setLeftEdges = function (pages, current_page) {
     var appendPage = _.bind(function (i) {
-        pages.push(extendPage({
+        pages.push(this.extendPage({
             number: i
         }));
     }, this);
 
-    var is_separated = current_page > (EDGES_LIMIT + CENTER_LIMIT + 2);
+    var is_separated = current_page > (this.options.edges_limit + this.options.center_limit + 2);
     if (is_separated) {
-        _.each(_.range(1, EDGES_LIMIT + 1), appendPage);
-        pages.push(extendPage({
+        _.each(_.range(1, this.options.edges_limit + 1), appendPage);
+        pages.push(this.extendPage({
             is_separator: true
         }));
-        _.each(_.range(current_page - CENTER_LIMIT, current_page), appendPage)
+        _.each(_.range(current_page - this.options.center_limit, current_page), appendPage)
     } else {
         _.each(_.range(1, current_page), appendPage);
     }
-}
+};
 
-function setRightEdges(pages, current_page, max_pages) {
+PaginationCounter.prototype.setRightEdges = function (pages, current_page, max_pages) {
     var appendPage = _.bind(function (i) {
-        pages.push(extendPage({
+        pages.push(this.extendPage({
             number: i
         }));
     }, this);
 
-    var is_separated = max_pages - current_page > (EDGES_LIMIT + CENTER_LIMIT + 1);
+    var is_separated = max_pages - current_page > (this.options.edges_limit + this.options.center_limit + 1);
     if (is_separated) {
-        _.each(_.range(current_page + 1, current_page + CENTER_LIMIT + 1), appendPage);
-        pages.push(extendPage({
+        _.each(_.range(current_page + 1, current_page + this.options.center_limit + 1), appendPage);
+        pages.push(this.extendPage({
             is_separator: true
         }));
-        _.each(_.range(max_pages - EDGES_LIMIT + 1, max_pages + 1), appendPage);
+        _.each(_.range(max_pages - this.options.edges_limit + 1, max_pages + 1), appendPage);
     } else {
         _.each(_.range(current_page + 1, max_pages + 1), appendPage);
     }
-}
+};
 
-function setNextPage(pages, current_page, max_pages) {
+PaginationCounter.prototype.setNextPage = function (pages, current_page, max_pages) {
     var page;
     if (current_page < max_pages) {
-        page = extendPage({
+        page = this.extendPage({
             number: current_page + 1,
             is_next: true
         });
     } else {
-        page = extendPage({
+        page = this.extendPage({
             number: current_page + 1,
             is_next: true,
             disabled: true
         })
     }
     pages.push(page);
+};
+
+/**
+ * Generate list of page numbers
+ * @param {Number} current_page - Current page
+ * @param {Number} max_pages - Maximum pages
+ * @param {Object} [options] - Calculate options.
+ * @returns {Object[]}
+ */
+function getPages(current_page, max_pages, options) {
+    var counter = new PaginationCounter(options);
+    return counter.getPages(current_page, max_pages)
 }
 
 module.exports = {
