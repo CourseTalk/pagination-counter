@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/CourseTalk/pagination-counter",
   "dependencies": {
-    "underscore": "^1.8.3"
+    "underscore": ">=1.7.0"
   },
   "devDependencies": {
     "mocha": "^2.2.5"
