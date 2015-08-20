@@ -1,5 +1,7 @@
 # pagination-counter
 
+[![Join the chat at https://gitter.im/CourseTalk/pagination-counter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CourseTalk/pagination-counter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/CourseTalk/pagination-counter.svg?branch=master)](https://travis-ci.org/CourseTalk/pagination-counter)
 
 This library calculate page numbers (buttons) that should be shown in pagination.
