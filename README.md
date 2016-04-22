@@ -18,7 +18,12 @@ Simple case:
 
 var pagination = require('pagination-counter');
 
-var result = pagination.getPages(1, 2); //-> [{ number: 0, is_previous: true, is_next: false, is_separator: false, disabled: true, active: false }, { number: 1, is_previous: false, is_next: false, is_separator: false, disabled: false, active: true }, { number: 2, is_previous: false, is_next: false, is_separator: false, disabled: false, active: false }, { number: 2, is_previous: false, is_next: true, is_separator: false, disabled: false, active: false }]
+var result = pagination.getPages(1, 2); //-> [
+    { number: 0, is_previous: true, is_next: false, is_separator: false, disabled: true, active: false },
+    { number: 1, is_previous: false, is_next: false, is_separator: false, disabled: false, active: true },
+    { number: 2, is_previous: false, is_next: false, is_separator: false, disabled: false, active: false },
+    { number: 2, is_previous: false, is_next: true, is_separator: false, disabled: false, active: false }
+]
 
 ```
 
@@ -37,12 +42,19 @@ Result list contains objects with information about page number (pagination butt
 
 - edges_limit: {Number} How many buttons may be shown next to the next/prev button. By default: 1
 - center_limit: {Number} How many buttons may be shown next to the button with current page number. By default: 2
+- hide_last_page: {Boolean} Should we hide last page button with last page number. By default: false
 
 ```
 
 var pagination = require('pagination-counter');
 
-var result = pagination.getPages(3, 5, {edges_limit: 0, center_limit: 0}); //-> [ { number: 2, is_previous: true, is_next: false, is_separator: false, disabled: false, active: false }, { number: 0, is_previous: false, is_next: false, is_separator: true, disabled: false, active: false }, { number: 3, is_previous: false, is_next: false, is_separator: false, disabled: false, active: true }, { number: 0, is_previous: false, is_next: false, is_separator: true, disabled: false, active: false }, { number: 4, is_previous: false, is_next: true, is_separator: false, disabled: false, active: false } ]
+var result = pagination.getPages(3, 5, {edges_limit: 0, center_limit: 0}); //-> [
+    { number: 2, is_previous: true, is_next: false, is_separator: false, disabled: false, active: false },
+    { number: 0, is_previous: false, is_next: false, is_separator: true, disabled: false, active: false },
+    { number: 3, is_previous: false, is_next: false, is_separator: false, disabled: false, active: true },
+    { number: 0, is_previous: false, is_next: false, is_separator: true, disabled: false, active: false },
+    { number: 4, is_previous: false, is_next: true, is_separator: false, disabled: false, active: false }
+]
 
 ```
 

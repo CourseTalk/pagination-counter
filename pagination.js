@@ -6,7 +6,8 @@ function PaginationCounter(options) {
 }
 PaginationCounter.DEFAULT = {
     edges_limit: 1,
-    center_limit: 2
+    center_limit: 2,
+    hide_last_page: false
 };
 
 PaginationCounter.prototype.getPages = function (current_page, max_pages) {
@@ -84,7 +85,9 @@ PaginationCounter.prototype.setRightEdges = function (pages, current_page, max_p
         pages.push(this.extendPage({
             is_separator: true
         }));
-        _.each(_.range(max_pages - this.options.edges_limit + 1, max_pages + 1), appendPage);
+        if(!this.options.hide_last_page) {
+            _.each(_.range(max_pages - this.options.edges_limit + 1, max_pages + 1), appendPage);
+        }
     } else {
         _.each(_.range(current_page + 1, max_pages + 1), appendPage);
     }

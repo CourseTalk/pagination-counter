@@ -490,5 +490,65 @@ describe('pagination', function () {
                     active: false }  ]);
         });
 
+        it('get pages: page 5 max page: 10 options: {edges_limit: 0, center_limit: 2, hide_last_page: true}', function () {
+            var result = pagination.getPages(5, 10, {edges_limit: 0, center_limit: 2, hide_last_page: true});
+
+            assert.deepEqual(result, [
+                { number: 4,
+                    is_previous: true,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 0,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: true,
+                    disabled: false,
+                    active: false },
+                { number: 3,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 4,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 5,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: true },
+                { number: 6,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 7,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: false,
+                    disabled: false,
+                    active: false },
+                { number: 0,
+                    is_previous: false,
+                    is_next: false,
+                    is_separator: true,
+                    disabled: false,
+                    active: false },
+                { number: 6,
+                    is_previous: false,
+                    is_next: true,
+                    is_separator: false,
+                    disabled: false,
+                    active: false }  ]);
+        });
+
     });
 });
